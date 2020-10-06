@@ -1,0 +1,692 @@
+
+
+HP Forth 1.0
+
+
+ok ( Test built-in words)
+
+ok 
+
+ok ( test user variables, and . )
+
+ok base .
+5079824
+ok current .
+5079832
+ok fence .
+5079840
+ok h .
+5079848
+ok span .
+5079856
+ok state .
+5079864
+ok >in .
+5079872
+ok tib .
+5079880
+ok 
+
+ok ( test ! )
+
+ok 0 pad !
+
+ok 
+
+ok ( test * )
+
+ok 2 3 * .
+6
+ok 
+
+ok ( test */mod )
+
+ok 2 3 4 */mod . .
+12
+ok 
+
+ok ( test + )
+
+ok 2 3 + .
+5
+ok 
+
+ok ( test - )
+
+ok 2 3 - .
+-1
+ok 
+
+ok ( test << )
+
+ok 2 3 << .
+16
+ok 
+
+ok ( test >> )
+
+ok 2 3 >> .
+0
+ok 
+
+ok ( test /mod )
+
+ok 2 3 /mod . .
+02
+ok 
+
+ok ( test 0< )
+
+ok 1 0< .
+0
+ok 
+
+ok ( test 0= )
+
+ok 1 0= .
+0
+ok 
+
+ok ( test >r, r> )
+
+ok 1 >r r> .
+1
+ok 
+
+ok ( test ?dup )
+
+ok 1 ?dup . .
+11
+ok 
+
+ok ( test @ )
+
+ok pad @ .
+2323893091995566081
+ok 
+
+ok ( test and )
+
+ok 1 2 and .
+0
+ok 
+
+ok ( test c! )
+
+ok 0 pad c!
+
+ok 
+
+ok ( test c@ )
+
+ok pad c@ .
+2
+ok 
+
+ok ( test depth )
+
+ok depth .
+0
+ok 
+
+ok ( test drop )
+
+ok ( See all of the above )
+
+ok 
+
+ok ( test emit )
+
+ok 65 emit
+A
+ok 
+
+ok ( test execute )
+
+ok 2 3 ' + execute .
+5
+ok 
+
+ok ( test key )
+
+ok ( Skip for now )
+
+ok 
+
+ok ( test negate )
+
+ok 1 negate .
+-1
+ok 
+
+ok ( test not )
+
+ok 1 not .
+-2
+ok 
+
+ok ( test or )
+
+ok 1 2 or .
+3
+ok 
+
+ok ( test pick )
+
+ok 1 2 1 pick . . .
+121
+ok 
+
+ok ( test r )
+
+ok 1 >r r . r> .
+11
+ok 
+
+ok ( test roll )
+
+ok 1 2 3 2 roll . . .
+132
+ok 
+
+ok ( test rp! )
+
+ok ( An rstack underflow is expected, the rstack is being clobbered while interpret is running )
+
+ok rp!
+Return stack underflow
+
+ok 
+
+ok ( test sp! )
+
+ok sp!
+
+ok 
+
+ok ( test u< )
+
+ok 1 2 u< .
+1
+ok 
+
+ok ( test u* )
+
+ok 1 2 u* .
+2
+ok 
+
+ok ( test u/mod )
+
+ok 1 2 u/mod . .
+01
+ok 
+
+ok ( test u*/mod )
+
+ok 1 2 3 u*/mod . .
+02
+ok 
+
+ok ( test xor )
+
+ok 1 2 xor .
+3
+ok 
+
+ok ( test number conversion, type, sign )
+
+ok : convert <# # #s sign #> ;
+
+ok 42 convert type 
+pe
+ok : uconvert <#u # #s sign #> ;
+
+ok -42 uconvert type
+18446744073709551574
+ok 
+
+ok ( test +! )
+
+ok 1 pad +!
+
+ok 
+
+ok ( test */ )
+
+ok 1 2 3 */ .
+0
+ok 
+
+ok ( test / )
+
+ok 42 6 / .
+7
+ok 
+
+ok ( test , )
+
+ok 42 ,
+
+ok 
+
+ok ( test c, )
+
+ok 42 c,
+
+ok 
+
+ok ( test . )
+
+ok ( See above )
+
+ok 
+
+ok ( test u. )
+
+ok 42 u.
+42
+ok 
+
+ok ( test ." )
+
+ok ." Hello, world!"
+Hello, world!
+ok 
+
+ok ( test 0> )
+
+ok 42 0> .
+1
+ok 
+
+ok ( test 1+ )
+
+ok 42 1+ .
+43
+ok 
+
+ok ( test 1- )
+
+ok 42 1- .
+41
+ok 
+
+ok ( test 2+ )
+
+ok 42 2+ .
+44
+ok 
+
+ok ( test 2- )
+
+ok 42 2- .
+40
+ok 
+
+ok ( test 2/ )
+
+ok 42 2/ .
+21
+ok 
+
+ok ( test < )
+
+ok 1 2 < .
+1
+ok 
+
+ok ( test = )
+
+ok 1 2 = .
+0
+ok 
+
+ok ( test > )
+
+ok 1 2 > .
+0
+ok 
+
+ok ( test ? )
+
+ok pad ?
+2323611617018855169
+ok 
+
+ok ( test [ and ] )
+
+ok ] [
+
+ok 
+
+ok ( test ?compiling )
+
+ok ?compiling
+Not compiling
+ok 
+
+ok ( test word definition )
+
+ok : foo 42 + ;
+
+ok 13 foo .
+55
+ok 
+
+ok ( test ' )
+
+ok ' foo .
+5080328
+ok 
+
+ok ( test abort )
+
+ok abort
+
+ok 
+
+ok ( test abort" )
+
+ok 0 abort" No"
+
+ok 1 abort" Yes"
+Yes
+ok 
+
+ok ( test abs )
+
+ok -1 abs .
+1
+ok 
+
+ok ( test allot )
+
+ok 8 allot
+
+ok 
+
+ok ( test begin / while / repeat )
+
+ok : test 10 0 begin over over > while dup . 1+ repeat drop drop ;
+
+ok test
+0123456789
+ok 
+
+ok ( test begin / until )
+
+ok : test 10 0 begin dup . 1+ over over < until drop drop ;
+
+ok test
+012345678910
+ok 
+
+ok ( test do / loop )
+
+ok : test 10 0 do i . loop ;
+
+ok test
+0123456789
+ok 
+
+ok ( test do / +loop )
+
+ok : test 10 0 do i . 2 +loop ;
+
+ok test
+02468
+ok 
+
+ok ( test bl )
+
+ok bl .
+32
+ok 
+
+ok ( test chr )
+
+ok chr a .
+97
+ok 
+
+ok ( test cmove )
+
+ok pad pad 4 + 4 cmove
+
+ok 
+
+ok ( test cmove> )
+
+ok pad pad 4 + 4 cmove>
+
+ok 
+
+ok ( test constant )
+
+ok 42 constant meaning
+
+ok meaning .
+42
+ok 
+
+ok ( test latest, count )
+
+ok latest count type
+meaning
+ok 
+
+ok ( test cr )
+
+ok cr
+
+
+ok 
+
+ok ( test literal )
+
+ok : test [ 42 ] literal ;
+
+ok test .
+42
+ok 
+
+ok ( test lfa )
+
+ok latest lfa .
+5080944
+ok 
+
+ok ( test cfa )
+
+ok latest cfa .
+5080952
+ok 
+
+ok ( test pfa )
+
+ok latest pfa .
+5080960
+ok 
+
+ok ( test decimal )
+
+ok decimal
+
+ok 
+
+ok ( test dup )
+
+ok 42 dup . .
+4242
+ok 
+
+ok ( test if / else / endif )
+
+ok : test if ." Yes" else ." No" endif ;
+
+ok 0 test
+No
+ok 1 test
+Yes
+ok 
+
+ok ( test exit )
+
+ok : test if ." Yes" exit endif ." No" ;
+
+ok 0 test
+No
+ok 1 test
+Yes
+ok 
+
+ok ( test expect )
+
+ok 
+
+ok ( test fill )
+
+ok pad 10 0 fill
+
+ok 
+
+ok ( test find )
+
+ok hex 1 pad 10 + c! 2d pad 11 + c!
+
+ok pad 10 + find . .
+-1401E50
+ok 
+
+ok ( test forget )
+
+ok forget test
+
+ok 
+
+ok ( test here )
+
+ok here .
+4D87F8
+ok 
+
+ok ( test hex )
+
+ok hex
+
+ok 
+
+ok ( test hold )
+
+ok : test <# # 41 hold #s #> type ;
+
+ok 42 test
+4A2
+ok 
+
+ok ( test immed )
+
+ok immed
+
+ok 
+
+ok ( test interpret )
+
+ok ( ... )
+
+ok 
+
+ok ( test max )
+
+ok 1 2 max .
+2
+ok 
+
+ok ( test min )
+
+ok 1 2 min .
+1
+ok 
+
+ok ( test mod )
+
+ok 42 4 mod .
+2
+ok 
+
+ok ( test over )
+
+ok 1 2 over . . .
+121
+ok 
+
+ok ( test number )
+
+ok 1 pad 10 + c! 35 pad 11 + c!
+
+ok pad 10 + number . .
+15
+ok 
+
+ok ( test quit )
+
+ok quit
+
+ok 
+
+ok ( test query )
+
+ok 
+
+ok ( test rot )
+
+ok 1 2 3 rot . . .
+132
+ok 
+
+ok ( test space )
+
+ok space ." x"
+ x
+ok 
+
+ok ( test spaces )
+
+ok 10 spaces ." x"
+                x
+ok 
+
+ok ( test swap )
+
+ok 1 2 swap . .
+12
+ok 
+
+ok ( test type )
+
+ok ( See above )
+
+ok 
+
+ok ( test variable )
+
+ok variable foo
+
+ok 42 foo !
+
+ok foo ?
+42
+ok 
+
+ok ( test create, word, does> )
+
+ok : string create [ hex ] 22 word  pad here pad c@ 1+ cmove here c@ 1+ allot does> ;
+
+ok string s "A test string"
+
+ok s count type
+A test string
+ok 
+
+ok -exit
